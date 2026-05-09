@@ -1,4 +1,4 @@
-# Generative UI Global Hackathon: Agentic Interfaces Starter Kit
+# Pulse Adaptive UI
 
 ![Hackathon Banner](apps/frontend/public/banner.jpg)
 

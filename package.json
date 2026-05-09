@@ -1,5 +1,5 @@
 {
-  "name": "v2a-notion-lead-form",
+  "name": "pulse-adaptive-ui",
   "version": "0.0.1",
   "private": true,
   "workspaces": [
@@ -16,9 +16,9 @@
     "dev:full": "npm run dev:infra && concurrently -k -n ui,bff,agent,mcp -c blue,cyan,green,magenta \"npm run dev:ui\" \"npm run dev:bff\" \"npm run dev:agent\" \"npm run dev:mcp\"",
     "dev:ui": "npm run dev --workspace frontend",
     "dev:bff": "npm run dev --workspace bff",
-    "dev:agent": "cd apps/agent && uv run langgraph dev --port 8133",
+    "dev:agent": "cd apps/agent && python -m uv run langgraph dev --port 8133",
     "dev:mcp": "npm run dev --workspace mcp",
-    "install:agent": "cd apps/agent && uv sync",
+    "install:agent": "cd apps/agent && python -m uv sync",
     "install:mcp": "npm install --workspace mcp",
     "postinstall": "npm run install:agent",
     "license": "npx copilotkit license -n hackathon-kit",

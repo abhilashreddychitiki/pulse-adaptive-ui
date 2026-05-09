@@ -22,7 +22,7 @@ from langgraph.graph.state import CompiledStateGraph
 
 from copilotkit import CopilotKitMiddleware
 
-from .lead_state import LeadStateMiddleware
+from .morphos_state import MorphosStateMiddleware
 from .timing import TimingMiddleware
 
 
@@ -79,9 +79,9 @@ def build_graph(
         runtime = "gemini-flash-deep"
 
     timing = TimingMiddleware()
-    lead_state = LeadStateMiddleware()
+    morphos_state = MorphosStateMiddleware()
     copilotkit = CopilotKitMiddleware()
-    middleware = [timing, lead_state, copilotkit]
+    middleware = [timing, morphos_state, copilotkit]
 
     if runtime == "noop":
         return _build_noop(NOOP_FALLBACK_MESSAGE)
@@ -144,17 +144,18 @@ def _build_noop(message: str) -> CompiledStateGraph:
 # --------------------------------------------------------------------- gemini
 
 def _gemini_llm():
-    """Build the configured Gemini Flash-Lite chat model.
+    """Build the configured Gemini 3.1 Pro chat model.
 
-    Default: `gemini-3.1-flash-lite` — the high-volume workhorse in the
-    Gemini 3 family. Verified against `langchain-google-genai` 2.x;
-    swap the id here if you want `gemini-3-flash` or a future tier.
+    Using `gemini-3.1-pro` for stronger reasoning — the Morphos
+    cognitive orchestrator needs to adapt its behavior based on the
+    user's cognitive load score, which benefits from a more capable
+    model. Swap to `gemini-3.1-flash-lite` for lower latency/cost.
     """
     from langchain_google_genai import ChatGoogleGenerativeAI
 
     api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY") or "stub"
     return ChatGoogleGenerativeAI(
-        model="gemini-3.1-flash-lite",
+        model="gemini-3.1-pro",
         temperature=0,
         api_key=api_key,
     )

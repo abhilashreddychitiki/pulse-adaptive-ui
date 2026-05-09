@@ -1,0 +1,231 @@
+/*
+ * Morphos — Cognitive-Load Aware UI styles
+ *
+ * Dark-mode palette optimized for infrastructure monitoring.
+ * Glassmorphism cards, smooth mode transitions, and the Cognitive Orb.
+ */
+
+/* ─── Morphos Dark Theme ──────────────────────────────────────────── */
+.morphos-theme {
+  --background: #0a0a1a;
+  --foreground: #e2e8f0;
+  --card: rgba(15, 15, 35, 0.8);
+  --card-foreground: #e2e8f0;
+  --primary: #6366f1;
+  --primary-foreground: #ffffff;
+  --secondary: #1e1e3a;
+  --secondary-foreground: #a5b4fc;
+  --muted: #1a1a2e;
+  --muted-foreground: #94a3b8;
+  --accent: #22d3ee;
+  --accent-foreground: #0a0a1a;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(99, 102, 241, 0.15);
+  --input: rgba(15, 15, 35, 0.6);
+  --ring: rgba(99, 102, 241, 0.4);
+
+  --chart-1: #22d3ee;
+  --chart-2: #6366f1;
+  --chart-3: #a78bfa;
+  --chart-4: #f59e0b;
+  --chart-5: #ef4444;
+
+  --sidebar: rgba(10, 10, 26, 0.95);
+  --sidebar-foreground: #e2e8f0;
+  --sidebar-border: rgba(99, 102, 241, 0.12);
+
+  color-scheme: dark;
+}
+
+/* ─── Cognitive Orb ───────────────────────────────────────────────── */
+
+.morphos-orb-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  user-select: none;
+}
+
+.morphos-orb-ring {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--orb-color) 30%, transparent) 0%,
+    transparent 70%
+  );
+  animation: morphos-orb-pulse var(--orb-pulse-duration) ease-in-out infinite;
+  pointer-events: none;
+}
+
+.morphos-orb-core {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 35%,
+    color-mix(in srgb, var(--orb-color) 25%, transparent),
+    rgba(10, 10, 26, 0.9) 80%
+  );
+  border: 1.5px solid color-mix(in srgb, var(--orb-color) 40%, transparent);
+  box-shadow:
+    0 0 12px color-mix(in srgb, var(--orb-color) 20%, transparent),
+    inset 0 0 8px color-mix(in srgb, var(--orb-color) 10%, transparent);
+  animation: morphos-orb-breathe var(--orb-pulse-duration) ease-in-out infinite;
+  transition: border-color 0.5s ease, box-shadow 0.5s ease, background 0.5s ease;
+}
+
+.morphos-orb-arc {
+  position: absolute;
+  inset: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+}
+
+.morphos-orb-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.morphos-orb-score {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--foreground);
+  opacity: 0.9;
+  letter-spacing: -0.5px;
+}
+
+.morphos-orb-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 80px;
+}
+
+.morphos-orb-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: color 0.5s ease;
+}
+
+/* ─── Orb Animations ──────────────────────────────────────────────── */
+
+@keyframes morphos-orb-pulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(var(--orb-ring-scale, 2));
+  }
+}
+
+@keyframes morphos-orb-breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+/* ─── Mode Transition Classes ─────────────────────────────────────── */
+
+.morphos-transition {
+  transition:
+    background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out,
+    border-color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out,
+    transform 0.3s ease-in-out,
+    opacity 0.3s ease-in-out,
+    font-size 0.3s ease-in-out,
+    padding 0.3s ease-in-out,
+    gap 0.3s ease-in-out;
+}
+
+/* ─── Glassmorphism Card ──────────────────────────────────────────── */
+
+.morphos-glass {
+  background: rgba(15, 15, 35, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(99, 102, 241, 0.12);
+  border-radius: 16px;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.morphos-glass:hover {
+  border-color: rgba(99, 102, 241, 0.25);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ─── Morphos Header ─────────────────────────────────────────────── */
+
+.morphos-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-radius: 16px;
+  background: rgba(15, 15, 35, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.morphos-header-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.morphos-header-title h1 {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #e2e8f0 0%, #a78bfa 50%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.morphos-header-title .morphos-subtitle {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  font-weight: 500;
+}
+
+/* ─── Mode-specific body classes ──────────────────────────────────── */
+
+.morphos-mode-panic .morphos-glass {
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.morphos-mode-panic .morphos-header {
+  border-color: rgba(239, 68, 68, 0.15);
+}
+
+.morphos-mode-zen .morphos-glass {
+  border-color: rgba(34, 211, 238, 0.15);
+}

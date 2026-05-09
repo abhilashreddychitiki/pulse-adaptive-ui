@@ -22,8 +22,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "mcp-use build",
-    "dev": "MCP_PORT=3011 mcp-use dev --port 3011",
-    "start": "MCP_PORT=3011 mcp-use start --port 3011",
+    "dev": "npx cross-env MCP_PORT=3011 mcp-use dev --port 3011",
+    "start": "npx cross-env MCP_PORT=3011 mcp-use start --port 3011",
     "deploy": "mcp-use deploy",
     "postinstall": "mcp-use generate-types || true"
   },

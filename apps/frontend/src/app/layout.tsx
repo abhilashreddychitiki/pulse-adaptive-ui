@@ -22,9 +22,9 @@ const splineMono = Spline_Sans_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AG-UI Canvas | CopilotKit Hackathon Starter",
+  title: "Morphos — Cognitive-Load Aware UI",
   description:
-    "Hackathon starter kit: CopilotKit canvas + threads drawer + Deep Agents + Gemini + Notion MCP",
+    "AI-powered fluid interface that monitors cognitive load and autonomously adapts its complexity. Built with CopilotKit, Gemini, A2UI, and MCP.",
 };
 
 export default function RootLayout({
